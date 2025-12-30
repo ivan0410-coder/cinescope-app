@@ -1,0 +1,243 @@
+:root {
+    --primary-color: #22254b;
+    --secondary-color: #373b69;
+    --bg-color: #141414; /* Fondo oscuro estilo Netflix */
+    --text-color: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    color: var(--text-color);
+}
+
+header {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--secondary-color);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #f5c518; /* Color dorado cine */
+}
+
+.search {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    border-radius: 50px;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    color: #fff;
+}
+
+.search::placeholder {
+    color: #bbb;
+}
+
+.search:focus {
+    outline: none;
+    background-color: var(--primary-color);
+}
+
+#main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Diseño de la Tarjeta de Película */
+.movie {
+    width: 300px;
+    margin: 1rem;
+    background-color: var(--secondary-color);
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.movie:hover {
+    transform: scale(1.02);
+}
+
+.movie img {
+    width: 100%;
+}
+
+.movie-info {
+    color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem 1rem;
+    letter-spacing: 0.5px;
+}
+
+.movie-info h3 {
+    margin-top: 0;
+}
+
+.movie-info span {
+    background-color: var(--primary-color);
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+/* Lógica visual de calificación (Tu punto 4) */
+.movie-info span.green {
+    color: lightgreen;
+    border: 1px solid lightgreen;
+}
+
+.movie-info span.orange {
+    color: orange;
+    border: 1px solid orange;
+}
+
+.movie-info span.red {
+    color: red;
+    border: 1px solid red;
+}
+/* --- ESTILOS PARA LA PÁGINA DE DETALLES --- */
+
+.back-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 20px;
+    background-color: var(--secondary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.details-container {
+    display: flex;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    flex-wrap: wrap; /* Para que en celular se ponga uno debajo del otro */
+}
+
+.details-poster {
+    width: 300px;
+    border-radius: 10px;
+    margin-right: 30px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.details-info {
+    flex: 1; /* Ocupa el resto del espacio */
+    color: white;
+}
+
+.details-info h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.tagline {
+    font-style: italic;
+    color: #bbb;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.genres span {
+    background-color: var(--primary-color);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-right: 5px;
+}
+/* Botón de corazón en la tarjeta */
+.fav-btn-card {
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #555; /* Color apagado por defecto */
+    transition: transform 0.2s;
+    z-index: 10; /* Para que esté por encima de la imagen */
+}
+
+.fav-btn-card:hover {
+    transform: scale(1.2);
+}
+
+/* Cuando está activo (Favorito) */
+.fav-btn-card.active {
+    color: red; /* Rojo pasión */
+}
+
+/* Ajuste para que el corazón y el rating convivan */
+.movie-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+/* --- SKELETON LOADING (Carga Fantasma) --- */
+
+/* Clase para la tarjeta mientras carga */
+.movie.skeleton {
+    background-color: #373b69; /* Color base */
+    position: relative;
+    overflow: hidden;
+    cursor: default; /* No mostrar manito de click */
+}
+
+/* Estructura interna del esqueleto (Caja gris para imagen y texto) */
+.skeleton-img {
+    width: 100%;
+    height: 400px; /* Altura aproximada del poster */
+    background-color: #484d75;
+}
+
+.skeleton-info-block {
+    height: 20px;
+    margin: 10px;
+    background-color: #484d75;
+    border-radius: 5px;
+}
+
+/* La animación del brillo pasando */
+.movie.skeleton::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0,
+        rgba(255, 255, 255, 0.05) 20%, /* Brillo muy sutil */
+        rgba(255, 255, 255, 0.1) 60%,
+        rgba(255, 255, 255, 0)
+    );
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
